@@ -2,31 +2,35 @@
 using namespace std;
 #define X first
 #define Y second
-int board[502][502];
-int dirt[502][502];
-int dx[4] = {1, 0, -1 ,0};
-int dy[4] = {0, 1, 0, -1};
-int n, m;
-int main(void){
+string board [102];
+int dir [102][102];
+int dx[4] = {1, 0 ,-1, 0};
+int dy[4] = {0, 1 ,0, -1};
+
+int main() {
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    int n, m;
     cin >> n >> m;
-    for (int i = 0; i < n; i ++)
-        for (int j = 0; j < m; j ++){
-            scanf("%1d", &board[i][j]);
-            dirt[i][j] = 0;
-        }
-    queue<pair<int, int>> Q;
+    // 붙어서 입력되는 값 처리 matrix 로 처리 가능함.
+    for (int i = 0; i < n; i ++){
+        cin >> board[i];
+    }
+
+    queue<pair<int, int>>Q;
     Q.push({0, 0});
-    dirt[0][0] = 1;
     while (!Q.empty()){
-        pair<int, int> cur= Q.front(); Q.pop();
-        for (int i = 0; i < 4; i ++){
-            int nx = dx[i] + cur.X;
-            int ny = dy[i] + cur.Y;
-            if (nx >= n || ny >= m || nx < 0|| ny < 0 ) continue;
-            if (board[nx][ny] != 1 || dirt[nx][ny]) continue;
-                dirt[nx][ny] = dirt[cur.X][cur.Y] + 1;
-                Q.push({nx, ny});
+        pair<int ,int> cur;
+        cur = Q.front();
+        Q.pop();
+        for (int i = 0; i < 4; i++){
+            int nx = cur.X + dx[i];
+            int ny = cur.Y + dy[i];
+            if (nx<0 || nx >= n || ny < 0 || ny >= m) continue;
+            if (dir[nx][ny] != 0 || board[nx][ny] == '0') continue; // string 고려해서 문자열로 확인
+            dir[nx][ny] = dir[cur.X][cur.Y] + 1;
+            Q.push({nx, ny});
         }
     }
-    cout << dirt[n - 1][m - 1];
+    cout << dir[n-1][m-1] + 1;
 }
