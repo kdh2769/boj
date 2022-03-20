@@ -24,12 +24,12 @@ int main() {
         cur = Q.front();
         Q.pop();
         for (int i = 0; i < 4; i++){
-            int nx = cur.X + dx[i];
-            int ny = cur.Y + dy[i];
-            if (nx<0 || nx >= n || ny < 0 || ny >= m) continue;
-            if (dir[nx][ny] != 0 || board[nx][ny] == '0') continue; // string 고려해서 문자열로 확인
-            dir[nx][ny] = dir[cur.X][cur.Y] + 1;
-            Q.push({nx, ny});
+           int nx = cur.X + dx[i];
+           int ny = cur.Y + dy[i];
+           if (nx<0 || nx >= n || ny < 0 || ny >= m) continue;
+           if (dir[nx][ny] != 0 || board[nx][ny] == '0') continue; // string 고려해서 문자열로 확인
+           dir[nx][ny] = dir[cur.X][cur.Y] + 1;
+           Q.push({nx, ny});
         }
     }
     cout << dir[n-1][m-1] + 1;
