@@ -16,7 +16,6 @@ int main() {
     for (int i = 0; i < n; i ++){
         cin >> board[i];
     }
-
     queue<pair<int, int>>Q;
     Q.push({0, 0});
     while (!Q.empty()){
